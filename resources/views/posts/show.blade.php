@@ -1,13 +1,15 @@
 @extends('layouts.app') 
 
 @section('content')
-    <a href="/posts" class="btn btn-outline-primary">Go back</a>
+    <a href="/posts" class="btn btn-block btn-primary ">Voltar</a>
     <hr>
     <h1>{{$post->title}}</h1>
-    <img class="img-fluid mb-3" src="/storage/cover_images/{{$post->cover_image}}" alt="">
+    <div class="m-3 text-center">
+    <img class="img-fluid" src="/storage/cover_images/{{$post->cover_image}}" alt="">
+</div>
     <div>{!!$post->body!!}</div>
     <hr>
-    <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
+    <small>Escrito em {{$post->created_at}} às {{$post->user->name}}</small>
     <hr>
     @if (!Auth::guest())
         @if (Auth::user()->id == $post->user_id || (Auth::user()->type == 1 && ($user->type != 1 || $user->id == Auth::user()->id)))

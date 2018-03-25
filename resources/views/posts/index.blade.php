@@ -6,16 +6,16 @@
         <div class="card card-block bg-faded p-3 mb-2">
             <div class="row">
                 <div class="col-4">
-                    <img style="width:100%" src="/storage/cover_images/{{$post->cover_image}}" alt="">
+                    <img style="width:100%; max-height: 180px;" src="/storage/cover_images/{{$post->cover_image}}" alt="">
                 </div>
                 <div class="col-8">
-                    <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
-                    <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
+                    <h3><a class="post-title" href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
+                    <small>Escrito dia {{$post->created_at}} por {{$post->user->name}}</small>
                 </div>
             </div>
         </div>
         @endforeach {{$posts->links()}} 
     @else
-    <p>No posts found.</p>
+    <p>Nenhuma postagem encontrada.</p>
     @endif
 @endsection
