@@ -178,9 +178,17 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $user_post = User::find($post->user_id);
 
-        //Check for correct user
-        if(auth()->user()->id !== $post->user_id){
+        //Verifica se a postagem é do usuário e se o tipo do usuário logado
+        //e o tipo do usuário da postagem são iguais (pois professor não pode 
+        //apagar uma mensagem de outro professor)
+        if(auth()->user()->id !== $post->user_id && auth()->user()->type == $user_post->type){
+            return redirect('/posts')->with('error', 'Unauthorized page');
+        }
+
+        //Verifica se o Usuário é aluno e se a postagem é de um professor
+        if(auth()->user()->type == 0 && $user_post->type == 1){
             return redirect('/posts')->with('error', 'Unauthorized page');
         }
 
