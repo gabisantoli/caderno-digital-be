@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage; //Pra deletar imagens quando deleta o post
 use App\Post;
+use App\User;
+use DB;
 
 class PostsController extends Controller
 {/**
@@ -92,7 +94,11 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.show')->with('post', $post);
+        $user = User::find($post->user_id);
+        
+        return view('posts.show')
+            ->with('post', $post)
+            ->with('user', $user);
     }
 
     /**
