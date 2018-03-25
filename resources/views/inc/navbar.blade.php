@@ -13,7 +13,6 @@
             </ul>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/about">Sobre</a></li>
                 <li class="nav-item"><a class="nav-link" href="/posts">Blog</a></li>
             </ul>
             <!-- Right Side Of Navbar -->
