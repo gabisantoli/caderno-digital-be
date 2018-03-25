@@ -4,19 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if (Auth::user()->type == 0)
-                <div class="alert alert-info">
-                    Você é aluno!
-                </div>
-            @endif
-            @if (Auth::user()->type == 1)
-                <div class="alert alert-info">
-                    Você é professor!
-                </div>
-            @endif
+            @include('inc.typeUser')
             <div class="card">
                 <div class="card-header">Dashboard</div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
