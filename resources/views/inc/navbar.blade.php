@@ -13,18 +13,17 @@
             </ul>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">Sobre</a></li>
                 <li class="nav-item"><a class="nav-link" href="/posts">Blog</a></li>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
-                <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                <li><a class="nav-link" href="{{ route('login') }}">Logar</a></li>
+                <li><a class="nav-link" href="{{ route('register') }}">Registrar</a></li>
                 @else
-                <li class="nav-item"><a class="nav-link" href="/posts/create">Create Post</a></li>
+                <li class="nav-item"><a class="nav-link" href="/posts/create">Criar post</a></li>
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" v-pre>

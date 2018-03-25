@@ -1,0 +1,90 @@
+body {
+  background: linear-gradient(-90deg, #6e276d, #de5d61, #611329);
+  color: white;
+}
+
+.logo {
+  max-height: 30vh;
+}
+
+.bg-dark {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.transparent-primary {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.transparent-secondary {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.btn{
+  color: white;
+  &:hover{
+    color: white;
+  }
+  &:active{
+    color: white;
+  }
+}
+
+.btn-primary {
+  @extend .transparent-primary;
+  border: 0;
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  &:active {
+    box-shadow: 0px;
+  }
+}
+
+.btn-secondary-c {
+  @extend .transparent-secondary;
+  border: 0;
+  &:hover {
+    background: rgba(0, 0, 0, 0.5) !important;
+  }
+  &:active {
+    box-shadow: 0px;
+  }
+}
+
+.form-control {
+  background-color: transparent;
+  border: 0px;
+  border-bottom: 2px solid white;
+  border-radius: 0px;
+  color: white;
+  &:focus {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #CCC;
+  }
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+.form-control::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+.card, .card-header{
+  @extend .transparent-primary;
+}
