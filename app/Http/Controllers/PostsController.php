@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage; //Pra deletar imagens quando deleta o post
 use App\Post;
 use App\User;
-use DB;
 
 class PostsController extends Controller
 {/**
