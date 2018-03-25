@@ -4,6 +4,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if (Auth::user()->type == 0)
+                <div class="alert alert-info">
+                    Você é aluno!
+                </div>
+            @endif
+            @if (Auth::user()->type == 1)
+                <div class="alert alert-info">
+                    Você é professor!
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
