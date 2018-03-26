@@ -13,23 +13,25 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a href="/posts/create" class="btn btn-primary mb-4">Create Post</a>
+                    <a href="/posts/create" class="btn btn-primary mb-4">Criar novo Post</a>
                     @if (count($posts) > 0)
-                    <h3>Your blog posts</h3>
+                    <h3>Suas postagens</h3>
                     <table class="table table-striped">
                         <tr>
-                            <th>Title</th>
+                            <th>Post</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
                         @foreach ($posts as $post)
                         <tr>
-                            <th>{{$post->title}}</th>
-                            <th><a href="/posts/{{$post->id}}/edit" class="btn btn-outline-info">Edit</a></th>
+                        <th><a href="/posts/{{$post->id}}"><img src="/storage/cover_images/{{$post->cover_image}}" alt="" class="img-thumbnail"></a></th>
+                            <th><a class="post-title" href="/posts/{{$post->id}}">{{$post->title}}</a></th>
+                            <th><a href="/posts/{{$post->id}}/edit" class="btn btn-outline-info">Editar</a></th>
                             <th> 
                                 {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right'])!!}
                                     {{Form::hidden('_method', 'DELETE')}}
-                                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                    {{Form::submit('Deletar', ['class' => 'btn btn-danger'])}}
                             
                                 {!!Form::close()!!}
                             </th>
