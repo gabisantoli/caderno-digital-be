@@ -48,7 +48,7 @@ class PostsTableSeeder extends Seeder
         DB::table('posts')->insert(
             [
                 'title' => 'Alguém tem o conteúdo da aula do Thiago do dia 13/03',
-                'body' => '<p>A gente vai conseguir 10 no primeiro sprint?</p>',
+                'body' => '<p>Manos, eu fui ver uma mina ai, e acabei faltando, podem me passar o conteúdo?</p>',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'user_id' => 2,
                 'cover_image' => 'jogo-pega-varetas-no-tubo-atacado_1522008643.jpg',
