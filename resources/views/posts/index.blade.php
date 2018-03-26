@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-8">
                     <h3><a class="post-title" href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
-                    <small>Escrito dia {{$post->created_at}} por {{$post->user->name}}</small>
+                    <small>Escrito dia {{strftime('%d/%m/%Y', strtotime($post->created_at))}} por {{$post->user->name}}</small>
                 </div>
             </div>
         </div>
