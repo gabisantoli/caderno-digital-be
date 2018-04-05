@@ -37,7 +37,7 @@ Route::put('posts/{id}', function(Request $request, $id){
     return $post;
 });
 
-Route::delete('articles/{id}', function($id){
+Route::delete('Posts/{id}', function($id){
     Post::find($id)->delete();
 
     return 204;
@@ -45,3 +45,16 @@ Route::delete('articles/{id}', function($id){
 
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout');
+Route::middleware('auth:api')->get('/user', function(Request $request){
+    return $request->user();
+});
+
+
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::get('posts', 'PostsController@getApi');
+    Route::get('posts/{Post}', 'PostsController@show');
+    Route::post('posts', 'PostsController@store');
+    Route::put('posts/{Post}', 'PostsController@update');
+    Route::delete('posts/{Post}', 'PostsController@destroy');
+});

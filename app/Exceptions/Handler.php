@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -48,6 +49,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        // This will replace our 404 response with
+        // a JSON response.
+            return response()->json([
+                'error' => $exception->getMessage()
+            ], 404);
     }
+
+    protected function unauthenticated($request, AuthenticationException $exception){
+    return response()->json(['error' => 'Não autorizado.'], 401);
+}
 }
