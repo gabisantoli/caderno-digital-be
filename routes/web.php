@@ -14,6 +14,7 @@
 Route::get('/', 'PagesController@index');
 
 Route::resource('posts', 'PostsController');
+Route::resource('answers', 'AnswersController');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage; //Pra deletar imagens quando deleta o post
 use App\Post;
 use App\User;
+use App\Answer;
 
 class PostsController extends Controller
 {/**
@@ -94,10 +95,15 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $user = User::find($post->user_id);
+        $answers = Answer::where('post_id', $id)->orderBy('created_at', 'desc')->get();
+        foreach ($answers as $answer) {
+            $answer->user = User::find($answer->user_id);
+        }
         
         return view('posts.show')
             ->with('post', $post)
-            ->with('user', $user);
+            ->with('user', $user)
+            ->with('answers', $answers);
     }
 
     /**
@@ -180,9 +186,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $user_post = User::find($post->user_id);
 
-        //Verifica se a postagem é do usuário e se o tipo do usuário logado
-        //e o tipo do usuário da postagem são iguais (pois professor não pode 
-        //apagar uma mensagem de outro professor)
+
         if(auth()->user()->id !== $post->user_id && auth()->user()->type == $user_post->type){
             return redirect('/posts')->with('error', 'Unauthorized page');
         }

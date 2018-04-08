@@ -23,4 +23,13 @@
             {!!Form::close()!!}
         @endif
     @endif
+
+    @if(count($answers) > 0)
+        @foreach($answers as $answer)
+        {{$answer->user->name}}: {{$answer->text}}<br>
+        <small>{{$answer->created_at}}</small>
+            <hr>
+        @endforeach
+    @endif
+
 @endsection
