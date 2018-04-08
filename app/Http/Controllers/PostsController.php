@@ -73,15 +73,10 @@ class PostsController extends Controller{
             $answer->user = User::find($answer->user_id);
         }
         
-<<<<<<< HEAD
         return view('posts.show')
             ->with('post', $post)
             ->with('user', $user)
             ->with('answers', $answers);
-=======
-        return $post;
-            //->with('user', $user);
->>>>>>> cd038a8c808b34727e614df024914835949cdebd
     }
 
     public function edit($id){
@@ -142,24 +137,16 @@ class PostsController extends Controller{
         $post = Post::find($id);
         $user_post = User::find($post->user_id);
 
-<<<<<<< HEAD
 
         if(auth()->user()->id !== $post->user_id && auth()->user()->type == $user_post->type){
             return redirect('/posts')->with('error', 'Unauthorized page');
-=======
-        //Verifica se a postagem é do usuário e se o tipo do usuário logado
-        //e o tipo do usuário da postagem são iguais (pois professor não pode 
-        //apagar uma mensagem de outro professor)
-        /*if(auth()->user()->id !== $post->user_id && auth()->user()->type == $user_post->type){
-            throw new Exception('safado');
->>>>>>> cd038a8c808b34727e614df024914835949cdebd
         }
 
         //Verifica se o Usuário é aluno e se a postagem é de um professor
         if(auth()->user()->type == 0 && $user_post->type == 1){
             throw new Exception();
         }
-*/
+
         if($post->cover_image != 'noimage.jpg'){
             //Delete image
             Storage::delete('/public/cover_images/' . $post->cover_image);
