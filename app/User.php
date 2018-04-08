@@ -31,7 +31,15 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+<<<<<<< HEAD
     public function answers(){
         return $this->hasMany('App\Answer');
+=======
+    public function generateToken(){
+        $this->api_token = str_random(60);
+        $this->save();
+
+        return $this->api_token;
+>>>>>>> cd038a8c808b34727e614df024914835949cdebd
     }
 }

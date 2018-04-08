@@ -2,53 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage; //Pra deletar imagens quando deleta o post
 use App\Post;
 use App\User;
 use App\Answer;
 
-class PostsController extends Controller
-{/**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+class PostsController extends Controller{
+    public function __construct(){
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+    public function getApi(){
+        return Post::all();
+    }
+
+    public function index(){
         //$posts = Post::all();
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         return view('posts.index')->with('posts', $posts);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function create(){
         return view('posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
@@ -85,14 +65,7 @@ class PostsController extends Controller
         return redirect('/posts')->with('success', 'Post created!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
+    public function show($id){
         $post = Post::find($id);
         $user = User::find($post->user_id);
         $answers = Answer::where('post_id', $id)->orderBy('created_at', 'desc')->get();
@@ -100,20 +73,18 @@ class PostsController extends Controller
             $answer->user = User::find($answer->user_id);
         }
         
+<<<<<<< HEAD
         return view('posts.show')
             ->with('post', $post)
             ->with('user', $user)
             ->with('answers', $answers);
+=======
+        return $post;
+            //->with('user', $user);
+>>>>>>> cd038a8c808b34727e614df024914835949cdebd
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
+    public function edit($id){
         $post = Post::find($id);
         
         //Check for correct user
@@ -123,15 +94,7 @@ class PostsController extends Controller
         return view('posts.edit')->with('post', $post);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required'
@@ -175,34 +138,35 @@ class PostsController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+    public function destroy($id){
         $post = Post::find($id);
         $user_post = User::find($post->user_id);
 
+<<<<<<< HEAD
 
         if(auth()->user()->id !== $post->user_id && auth()->user()->type == $user_post->type){
             return redirect('/posts')->with('error', 'Unauthorized page');
+=======
+        //Verifica se a postagem é do usuário e se o tipo do usuário logado
+        //e o tipo do usuário da postagem são iguais (pois professor não pode 
+        //apagar uma mensagem de outro professor)
+        /*if(auth()->user()->id !== $post->user_id && auth()->user()->type == $user_post->type){
+            throw new Exception('safado');
+>>>>>>> cd038a8c808b34727e614df024914835949cdebd
         }
 
         //Verifica se o Usuário é aluno e se a postagem é de um professor
         if(auth()->user()->type == 0 && $user_post->type == 1){
-            return redirect('/posts')->with('error', 'Unauthorized page');
+            throw new Exception();
         }
-
+*/
         if($post->cover_image != 'noimage.jpg'){
             //Delete image
             Storage::delete('/public/cover_images/' . $post->cover_image);
         }
 
-        $post->delete();
+        return $post->delete();
         
-        return redirect('/posts')->with('success', 'Post deleted!');
+        //return redirect('/posts')->with('success', 'Post deleted!');
     }
 }
