@@ -24,7 +24,7 @@ exit \b
 IF "%~1"=="" (
 	echo O arquivo da box nao existe
 ) ELSE (
-	:: Instala��o da box
+	:: Instalação da box
 	echo Encontrei o virtualbox.box, boa man :)
 	echo Instalando box...
 	vagrant box add laravel/homestead file:///%~1
@@ -32,7 +32,7 @@ IF "%~1"=="" (
 	:: Como a box foi instalada com o arquivo local, é necessário definir a versão manualmente
 	echo Configurando box...
 	cd %APPDATA%/../../.vagrant.d/boxes/laravel-VAGRANTSLASH-homestead
-	echo "https://app.vagrantup.com/laravel/boxes/homestead" >> metadata_url
+	echo https://app.vagrantup.com/laravel/boxes/homestead >> metadata_url
 	rename 0 5.2.0
 
 	:: A adição da URL no hosts torna o "homestead.test" disponível por HTTPS e por HTTP
