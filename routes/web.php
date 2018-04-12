@@ -18,8 +18,6 @@ Route::resource('answers', 'AnswersController');
 //Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
-
-Route::get('/teste', 'PostsController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
