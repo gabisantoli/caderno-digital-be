@@ -24,21 +24,23 @@
         @endif
     @endif
 
+    <br><br><br>
+
     @if(count($answers) > 0)
         @foreach($answers as $answer)
             {{$answer->user->name}}: {{$answer->text}}<br>
             <div class="row">
                 <small>{{$answer->created_at}}</small>
-                @if ($actionButton['delete'])
-                    <div class="ml-4">
-                        {!!Form::open(['action' => ['AnswersController@destroy', $answer->id], 'method' => 'POST', 'class' => ''])!!}
-                        {{Form::hidden('_method', 'DELETE')}}
-                        {{Form::submit('Deletar', ['class' => 'btn btn-danger'])}}
-                    </div>
-                @endif
                 @if ($actionButton['edit'])
                     <div class="ml-4">
-                        <a href="">Editar</a>
+                        <a href="" class="btn btn-primary">Editar</a>
+                    </div>
+                @endif
+                @if ($actionButton['delete'])
+                    <div class="ml-4">
+                        {!!Form::open(['action' => ['AnswersController@destroy', $answer->id, $post->id], 'method' => 'POST', 'class' => ''])!!}
+                        {{Form::hidden('_method', 'DELETE')}}
+                        {{Form::submit('Deletar', ['class' => 'btn btn-danger'])}}
                     </div>
                 @endif
             </div>
