@@ -15,11 +15,9 @@ Route::get('/', 'PagesController@index');
 
 Route::resource('posts', 'PostsController');
 Route::resource('answers', 'AnswersController');
-//Auth::routes();
+Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index');
-
-Route::get('/teste', 'PostsController@index');
+Route::get('/dashboard', 'DashboardController@index');  
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

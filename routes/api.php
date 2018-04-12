@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use App\Post;
-use App\Http\Controllers\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', 'RegisterController@register');
-Route::post('login', 'LoginController@login');
-Route::post('logout', 'LoginController@logout');
+Route::post('register', 'Auth\RegisterController@register');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout');
 Route::middleware('auth:api')->get('/user', function(Request $request){
     return $request->user();
 });
