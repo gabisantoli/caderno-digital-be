@@ -23,3 +23,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::delete('/answers/{answer}/{post}', 'AnswersController@destroy');
+Route::get('/answers/create/{post}', 'AnswersController@create');
+Route::get('/answers/edit/{post}/{answer}', 'AnswersController@edit');
