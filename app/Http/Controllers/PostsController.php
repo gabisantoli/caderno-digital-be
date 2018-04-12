@@ -69,14 +69,28 @@ class PostsController extends Controller{
         $post = Post::find($id);
         $user = User::find($post->user_id);
         $answers = Answer::where('post_id', $id)->orderBy('created_at', 'desc')->get();
+        $button = array('delete' => false, 'edit' => false);
         foreach ($answers as $answer) {
             $answer->user = User::find($answer->user_id);
+            if (auth()->user()->id == $answer->user_id) {
+                $button = array(
+                    'delete' => true,
+                    'edit' => true
+                );
+            }
+            if (auth()->user()->type == 1 && $answer->user->type == 0) {
+                $button = array(
+                    'delete' => true,
+                    'edit' => false,
+                );
+            }
         }
-        
+
         return view('posts.show')
             ->with('post', $post)
             ->with('user', $user)
-            ->with('answers', $answers);
+            ->with('answers', $answers)
+            ->with('actionButton', $button);
     }
 
     public function edit($id){
@@ -136,7 +150,6 @@ class PostsController extends Controller{
     public function destroy($id){
         $post = Post::find($id);
         $user_post = User::find($post->user_id);
-
 
         if(auth()->user()->id !== $post->user_id && auth()->user()->type == $user_post->type){
             return redirect('/posts')->with('error', 'Unauthorized page');

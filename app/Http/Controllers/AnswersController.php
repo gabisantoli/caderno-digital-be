@@ -118,16 +118,16 @@ class AnswersController extends Controller
         $user_answer = User::find($answer->user_id);
 
         if(auth()->user()->id !== $answer->user_id && auth()->user()->type == $user_answer->type){
-            return redirect('/answers')->with('error', 'Unauthorized page');
+            return redirect('/posts')->with('error', 'Unauthorized page');
         }
 
         //Verifica se o Usuário é aluno e se a resposta é de um professor
         if(auth()->user()->type == 0 && $user_answer->type == 1){
-            return redirect('/answers')->with('error', 'Unauthorized page');
+            return redirect('/posts')->with('error', 'Unauthorized page');
         }
 
         $answer->delete();
         
-        return redirect('/answers')->with('success', 'Answer deleted!');
+        return redirect('/posts')->with('success', 'Answer deleted!');
     }
 }
