@@ -51,10 +51,12 @@ class Handler extends ExceptionHandler
     {
         // This will replace our 404 response with
         // a JSON response.
-            return response()->json([
+            /*return response()->json([
                 'error' => $exception->getMessage()
-            ], 404);
-    }
+            ], 404);*/
+            return parent::render($request, $exception);
+
+        }
 
     protected function unauthenticated($request, AuthenticationException $exception){
     return response()->json(['error' => 'Não autorizado.'], 401);

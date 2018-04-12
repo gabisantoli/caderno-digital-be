@@ -1,12 +1,12 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
     <a href="/posts" class="btn btn-block btn-primary ">Voltar</a>
     <hr>
     <h1>{{$post->title}}</h1>
     <div class="m-3 text-center">
-    <img class="img-fluid" src="/storage/cover_images/{{$post->cover_image}}" alt="">
-</div>
+        <img class="img-fluid" src="/storage/cover_images/{{$post->cover_image}}" alt="">
+    </div>
     <div>{!!$post->body!!}</div>
     <hr>
     <small>Escrito em {{ strftime('%d/%m/%Y', strtotime($post->created_at))}} por: {{$post->user->name}}</small>
@@ -19,15 +19,29 @@
             {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right'])!!}
             {{Form::hidden('_method', 'DELETE')}}
             {{Form::submit('Deletar', ['class' => 'btn btn-danger'])}}
-        
+
             {!!Form::close()!!}
         @endif
     @endif
 
     @if(count($answers) > 0)
         @foreach($answers as $answer)
-        {{$answer->user->name}}: {{$answer->text}}<br>
-        <small>{{$answer->created_at}}</small>
+            {{$answer->user->name}}: {{$answer->text}}<br>
+            <div class="row">
+                <small>{{$answer->created_at}}</small>
+                @if ($actionButton['delete'])
+                    <div class="ml-4">
+                        {!!Form::open(['action' => ['AnswersController@destroy', $answer->id], 'method' => 'POST', 'class' => ''])!!}
+                        {{Form::hidden('_method', 'DELETE')}}
+                        {{Form::submit('Deletar', ['class' => 'btn btn-danger'])}}
+                    </div>
+                @endif
+                @if ($actionButton['edit'])
+                    <div class="ml-4">
+                        <a href="">Editar</a>
+                    </div>
+                @endif
+            </div>
             <hr>
         @endforeach
     @endif
