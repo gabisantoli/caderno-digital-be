@@ -25,15 +25,17 @@
     @endif
 
     <br><br><br>
+    <a href="/answers/create/{{$post->id}}" class="btn btn-primary">Responder</a>
+    <br><br><br>
 
     @if(count($answers) > 0)
         @foreach($answers as $answer)
-            {{$answer->user->name}}: {{$answer->text}}<br>
+            <div class="text-left">{{$answer->user->name}}: {!!$answer->text!!}<br></div>
             <div class="row">
                 <small>{{$answer->created_at}}</small>
                 @if ($actionButton['edit'])
                     <div class="ml-4">
-                        <a href="" class="btn btn-primary">Editar</a>
+                        <a href="/answers/edit/{{$post->id}}/{{$answer->id}}" class="btn btn-primary">Editar</a>
                     </div>
                 @endif
                 @if ($actionButton['delete'])
