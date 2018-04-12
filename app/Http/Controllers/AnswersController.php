@@ -33,9 +33,10 @@ class AnswersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($post_id)
     {
-        return view('answers.create');
+        return view('answers.create')
+            ->with('post_id', $post_id);
     }
 
     /**
@@ -49,7 +50,14 @@ class AnswersController extends Controller
         $this->validate($request, [
             'text' => 'required',
         ]);
-        return redirect('/answers')->with('success', 'Answer created!');
+
+        $answer = new Answer;
+        $answer->text = $request->input('text');
+        $answer->post_id = $request->input('post_id');
+        $answer->user_id = auth()->user()->id;
+        $answer->save();
+
+        return redirect('/posts/' . $answer->post_id)->with('success', 'Answer created!');
     }
 
     /**
