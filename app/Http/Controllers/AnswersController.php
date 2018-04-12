@@ -82,15 +82,18 @@ class AnswersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($post_id, $id)
     {
+        $post = Post::find($post_id);
         $answer = Answer::find($id);
         
         //Check for correct user
         if(auth()->user()->id !== $answer->user_id){
             return redirect('/answers')->with('error', 'Unauthorized page');
         }
-        return view('answers.edit')->with('answer', $answer);
+        return view('answers.edit')
+            ->with('answer', $answer)
+            ->with('post', $post);
     }
 
     /**
@@ -108,10 +111,11 @@ class AnswersController extends Controller
 
         $answer = Answer::find($id);
         $answer->text = $request->input('text');
+        $post_id = $request->input('post_id');
 
         $answer->save();
 
-        return redirect('/answers')->with('success', 'Answer Updated successfully!');
+        return redirect('/posts/' . $post_id)->with('success', 'Answer Updated successfully!');
     }
 
     /**
