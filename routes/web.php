@@ -21,3 +21,5 @@ Route::get('/dashboard', 'DashboardController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::delete('/answers/{answer}/{post}', 'AnswersController@destroy');
