@@ -69,7 +69,6 @@ class PostsController extends Controller{
         $post = Post::find($id);
         $user = User::find($post->user_id);
         $answers = Answer::where('post_id', $id)->orderBy('created_at', 'desc')->get();
-        //$button = array('delete' => false, 'edit' => false);
         foreach ($answers as $answer) {
             $answer->user = User::find($answer->user_id);
 
