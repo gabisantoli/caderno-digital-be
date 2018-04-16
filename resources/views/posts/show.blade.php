@@ -33,12 +33,12 @@
             <div class="text-left">{{$answer->user->name}}: {!!$answer->text!!}<br></div>
             <div class="row">
                 <small>{{$answer->created_at}}</small>
-                @if ($actionButton['edit'])
+                @if ($answer->button['edit'])
                     <div class="ml-4">
                         <a href="/answers/edit/{{$post->id}}/{{$answer->id}}" class="btn btn-primary">Editar</a>
                     </div>
                 @endif
-                @if ($actionButton['delete'])
+                @if ($answer->button['delete'])
                     <div class="ml-4">
                         {!!Form::open(['action' => ['AnswersController@destroy', $answer->id, $post->id], 'method' => 'POST', 'class' => ''])!!}
                         {{Form::hidden('_method', 'DELETE')}}

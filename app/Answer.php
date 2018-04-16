@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
+
+    public $button = array('delete' => false, 'edit' => false);
+
     public function post(){
         return $this->belongsTo('App\Post');
     }

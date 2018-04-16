@@ -69,28 +69,31 @@ class PostsController extends Controller{
         $post = Post::find($id);
         $user = User::find($post->user_id);
         $answers = Answer::where('post_id', $id)->orderBy('created_at', 'desc')->get();
-        $button = array('delete' => false, 'edit' => false);
+        //$button = array('delete' => false, 'edit' => false);
         foreach ($answers as $answer) {
             $answer->user = User::find($answer->user_id);
+
             if (auth()->user()->id == $answer->user_id) {
-                $button = array(
+                $answer->button = array(
                     'delete' => true,
                     'edit' => true
                 );
             }
+
             if (auth()->user()->type == 1 && $answer->user->type == 0) {
-                $button = array(
+                $answer->button = array(
                     'delete' => true,
                     'edit' => false,
                 );
             }
+
+
         }
 
         return view('posts.show')
             ->with('post', $post)
             ->with('user', $user)
-            ->with('answers', $answers)
-            ->with('actionButton', $button);
+            ->with('answers', $answers);
     }
 
     public function edit($id){
