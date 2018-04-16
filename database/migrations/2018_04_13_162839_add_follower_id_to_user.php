@@ -13,8 +13,11 @@ class AddFollowerIdToUser extends Migration
      */
     public function up()
     {
-        Schema::table('answers', function($table){
+        Schema::table('followers', function($table){
             $table->integer('user_id');
+        });
+
+        Schema::table('followers', function($table){
             $table->integer('follower_id');
         });
     }
@@ -26,6 +29,12 @@ class AddFollowerIdToUser extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('followers', function($table){
+            $table->dropColumn('user_id');
+        });
+
+        Schema::table('followers', function($table){
+            $table->dropColumn('follower_id');
+        });
     }
 }
