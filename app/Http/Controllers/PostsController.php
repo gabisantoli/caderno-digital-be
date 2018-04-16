@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage; //Pra deletar imagens quando deleta o post
 use App\Post;
@@ -39,10 +40,10 @@ class PostsController extends Controller{
         if($request->hasFile('cover_image')){
             //Get fileName with extension
             $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-             
+
             //Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            
+
             //Get file Extension
             $extension = $request->file('cover_image')->getClientOriginalExtension();
 
@@ -54,7 +55,7 @@ class PostsController extends Controller{
         }else{
             $fileNameToStore = 'noimage.jpg';
         }
-        
+
         $post = new Post;
         $post->title = $request->input('title');
         $post->body = $request->input('body');
@@ -69,24 +70,26 @@ class PostsController extends Controller{
         $post = Post::find($id);
         $user = User::find($post->user_id);
         $answers = Answer::where('post_id', $id)->orderBy('created_at', 'desc')->get();
-        foreach ($answers as $answer) {
-            $answer->user = User::find($answer->user_id);
+        if (Auth::check()) {
+            foreach ($answers as $answer) {
+                $answer->user = User::find($answer->user_id);
 
-            if (auth()->user()->id == $answer->user_id) {
-                $answer->button = array(
-                    'delete' => true,
-                    'edit' => true
-                );
+                if (auth()->user()->id == $answer->user_id) {
+                    $answer->button = array(
+                        'delete' => true,
+                        'edit' => true
+                    );
+                }
+
+                if (auth()->user()->type == 1 && $answer->user->type == 0) {
+                    $answer->button = array(
+                        'delete' => true,
+                        'edit' => false,
+                    );
+                }
+    
+
             }
-
-            if (auth()->user()->type == 1 && $answer->user->type == 0) {
-                $answer->button = array(
-                    'delete' => true,
-                    'edit' => false,
-                );
-            }
-
-
         }
 
         return view('posts.show')
@@ -97,7 +100,7 @@ class PostsController extends Controller{
 
     public function edit($id){
         $post = Post::find($id);
-        
+
         //Check for correct user
         if(auth()->user()->id !== $post->user_id){
             return redirect('/posts')->with('error', 'Unauthorized page');
@@ -115,10 +118,10 @@ class PostsController extends Controller{
         if($request->hasFile('cover_image')){
             //Get fileName with extension
             $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-             
+
             //Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            
+
             //Get file Extension
             $extension = $request->file('cover_image')->getClientOriginalExtension();
 
@@ -138,7 +141,7 @@ class PostsController extends Controller{
             if($post->cover_image != 'noimage.jpg'){
                 //Delete image
                 Storage::delete('/public/cover_images/' . $post->cover_image);
-            }            
+            }
             //Salvar somente se tiver enviado a imagem
             $post->cover_image = $fileNameToStore;
         }
@@ -146,7 +149,7 @@ class PostsController extends Controller{
         $post->save();
 
         return redirect('/posts')->with('success', 'Post Updated successfully!');
-        
+
     }
 
     public function destroy($id){
@@ -168,7 +171,7 @@ class PostsController extends Controller{
         }
 
         return $post->delete();
-        
+
         //return redirect('/posts')->with('success', 'Post deleted!');
     }
 }
