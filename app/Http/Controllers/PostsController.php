@@ -69,7 +69,7 @@ class PostsController extends Controller{
     public function show($id){
         $post = Post::find($id);
         $user = User::find($post->user_id);
-        $answers = Answer::where('post_id', $id)->orderBy('created_at', 'desc')->get();
+        $answers = Answer::where('post_id', $id)->orderBy('created_at', 'asc')->get();
         if (Auth::check()) {
             foreach ($answers as $answer) {
                 $answer->user = User::find($answer->user_id);
@@ -87,7 +87,7 @@ class PostsController extends Controller{
                         'edit' => false,
                     );
                 }
-    
+
 
             }
         }
