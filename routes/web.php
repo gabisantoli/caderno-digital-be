@@ -32,6 +32,7 @@ Route::get('/answers/create/{post}', 'AnswersController@create');
 Route::get('/answers/edit/{post}/{answer}', 'AnswersController@edit');
 
 //Followers
-Route::post('/followers/{follower}/{post}', 'FollowersController@store');
+Route::get('/followers/create/{user}', 'FollowersController@create');
+Route::post('/followers/store/', 'FollowersController@store');
 Route::get('/followers/{follower}/', 'FollowersController@show');
 Route::delete('/followers/{follower}/{post}', 'FollowersController@delete');
