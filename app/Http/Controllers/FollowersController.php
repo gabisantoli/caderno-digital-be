@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Follower;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class FollowersController extends Controller
 {
@@ -16,20 +17,32 @@ class FollowersController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
+    public function create($user_id) {
+        $user = User::find($user_id);
+        $btnLabel = 'Seguir';
+
+//        verificar se usuário e follower são iguais
+//        trocar link e label para unfollow se já estiver seguindo
+
+        return view('followers.create')
+            ->with('user', $user)
+            ->with('label', $btnLabel);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id_follower, $id_post)
+    public function store(Request $request)
     {
         $follower = new Follower();
-        $follower->follower_id = $id_follower;
-        $follower->user_id = auth()->user()->id;
+        $follower->follower_id = $request->input('follower_id');
+        $follower->user_id = $request->input('user_id');
         $follower->save();
 
-        return redirect('/posts/' . $id_post)->with('success', 'Follower created!');
+        return redirect('/posts/')->with('success', 'Follower created!');
     }
 
     /**
