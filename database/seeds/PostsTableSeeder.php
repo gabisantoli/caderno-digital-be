@@ -17,7 +17,7 @@ class PostsTableSeeder extends Seeder
 
         DB::table('posts')->insert(
             [
-                'title' => 'Entenda o por que do CodeIgniter ser melhor que o SpringBoot',
+                'title' => 'Entenda o porquê do CodeIgniter ser melhor que o SpringBoot',
                 'body' => '<p>Porque sim.</p>',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'user_id' => 6,
