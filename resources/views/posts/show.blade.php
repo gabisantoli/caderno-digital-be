@@ -9,7 +9,7 @@
     </div>
     <div>{!!$post->body!!}</div>
     <hr>
-    <small>Escrito em {{ strftime('%d/%m/%Y', strtotime($post->created_at))}} por: {{$post->user->name}}</small>
+    <small>Escrito em {{ strftime('%d/%m/%Y', strtotime($post->created_at))}} por: <a href="/followers/create/{{$user->id}}" style="color: #fff"> {{$post->user->name}} </a> </small>
     <hr>
     @if (!Auth::guest())
         @if (Auth::user()->id == $post->user_id)
