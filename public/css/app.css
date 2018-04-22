@@ -10103,3 +10103,14 @@ body {
   text-decoration: none;
 }
 
+.card{
+  transition: 2s;
+}
+
+.card:hover{
+  color: cyan;
+  text-decoration: none;
+  transform: scale(1.05);
+  transition: 2s;
+}
+

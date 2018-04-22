@@ -17,6 +17,7 @@ Route::get('/', 'PagesController@index');
 //Resources
 Route::resource('posts', 'PostsController');
 Route::resource('answers', 'AnswersController');
+//Route::resource('followers', 'FollowersController');
 Auth::routes();
 
 //Dashboard
@@ -35,4 +36,4 @@ Route::get('/answers/edit/{post}/{answer}', 'AnswersController@edit');
 Route::get('/followers/create/{user}', 'FollowersController@create');
 Route::post('/followers/store/', 'FollowersController@store');
 Route::get('/followers/{follower}/', 'FollowersController@show');
-Route::delete('/followers/{follower}/{post}', 'FollowersController@delete');
+Route::post('/followers/destroy/', 'FollowersController@destroy');

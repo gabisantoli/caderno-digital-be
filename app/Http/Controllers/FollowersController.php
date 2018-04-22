@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\User;
 use App\Follower;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class FollowersController extends Controller
@@ -19,14 +19,27 @@ class FollowersController extends Controller
 
     public function create($user_id) {
         $user = User::find($user_id);
-        $btnLabel = 'Seguir';
+        $following = DB::table('followers')
+            ->where('user_id', $user_id)
+            ->where('follower_id', auth()->user()->id)
+            ->get();
+        $followers = DB::table('followers')
+            ->where('user_id', $user_id)
+            ->get();
 
-//        verificar se usuário e follower são iguais
-//        trocar link e label para unfollow se já estiver seguindo
+        if (sizeof($following) > 0) {
+            $btnLabel = 'Deixar de seguir';
+            $action = 'FollowersController@destroy';
+        } else {
+            $btnLabel = 'Seguir';
+            $action = 'FollowersController@store';
+        }
 
         return view('followers.create')
             ->with('user', $user)
-            ->with('label', $btnLabel);
+            ->with('label', $btnLabel)
+            ->with('action', $action)
+            ->with('followers', sizeof($followers));
     }
 
     /**
@@ -40,9 +53,12 @@ class FollowersController extends Controller
         $follower = new Follower();
         $follower->follower_id = $request->input('follower_id');
         $follower->user_id = $request->input('user_id');
-        $follower->save();
 
-        return redirect('/posts/')->with('success', 'Follower created!');
+        if ($follower->follower_id != $follower->user_id) {
+            $follower->save();
+        }
+
+        return redirect('/followers/create/'. $follower->user_id)->with('success', 'Follower created!');
     }
 
     /**
@@ -67,13 +83,14 @@ class FollowersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $post_id)
+    public function destroy(Request $request)
     {
+        $user_id = $request->input('user_id');
         DB::table($this->table)->where([
-            ['user_id', auth()->user()->id],
-            ['follower_id', $id],
+            ['user_id', $user_id],
+            ['follower_id', auth()->user()->id],
         ])->delete();
 
-        return redirect('/posts/' . $post_id)->with('success', 'Follower deleted!');
+        return redirect('/followers/create/' . $user_id)->with('success', 'Follower deleted!');
     }
 }
