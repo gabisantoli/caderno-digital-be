@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use DB;
 use App\User;
 use App\Follower;
+use App\Score;
 use Illuminate\Http\Request;
 
 class FollowersController extends Controller
 {
 
     private $table = "followers";
+    private $points = 1000;
 
     public function index()
     {
@@ -56,6 +58,9 @@ class FollowersController extends Controller
 
         if ($follower->follower_id != $follower->user_id) {
             $follower->save();
+            $score = Score::where("user_id", $follower->user_id)->take(1)->get()[0];
+            $score->points += $this->points;
+            $score->save();
         }
 
         return redirect('/followers/create/'. $follower->user_id)->with('success', 'Follower created!');
@@ -90,6 +95,10 @@ class FollowersController extends Controller
             ['user_id', $user_id],
             ['follower_id', auth()->user()->id],
         ])->delete();
+
+        $score = Score::where("user_id", $user_id)->take(1)->get()[0];
+        $score->points -= $this->points;
+        $score->save();
 
         return redirect('/followers/create/' . $user_id)->with('success', 'Follower deleted!');
     }
