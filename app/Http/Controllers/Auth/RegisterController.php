@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Score;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -43,6 +44,8 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
 
+        $this->create_score_to_user($user->id);
+
         $this->guard()->login($user);
 
         return $this->registered($request, $user) ?: redirect($this->redirectPath());
@@ -52,5 +55,11 @@ class RegisterController extends Controller
         $user->generateToken();
 
         return response()->json(['data' => $user->toArray()], 201);
+    }
+
+    private function create_score_to_user($id){
+        $score = new Score;
+        $score->user_id = $id;
+        $score->save();
     }
 }
