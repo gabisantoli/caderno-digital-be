@@ -17,8 +17,8 @@ class CreateScoresTable extends Migration
             $table->increments('id');
             $table->integer('level')->default(1);
             $table->integer('points')->default(0);
-            $table->integer('qtd_followers');
-            $table->integer('qtd_likes');
+            $table->integer('qtd_followers')->default(0);
+            $table->integer('qtd_likes')->default(0);
             $table->timestamps();
         });
     }
