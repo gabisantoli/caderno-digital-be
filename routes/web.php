@@ -17,6 +17,7 @@ Route::get('/', 'PagesController@index');
 //Resources
 Route::resource('posts', 'PostsController');
 Route::resource('answers', 'AnswersController');
+Route::get('profile', 'ProfileController@edit');
 //Route::resource('followers', 'FollowersController');
 Auth::routes();
 
@@ -24,8 +25,13 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index');  
 Auth::routes();
 
+
+
 //Home
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Profile
+Route::get('/profile/update', 'ProfileController@update');
 
 //Answers
 Route::delete('/answers/{answer}/{post}', 'AnswersController@destroy');

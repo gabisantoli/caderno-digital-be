@@ -1,0 +1,45 @@
+Subindo o Back
+Para subir o back e manter o endere�o �fixo�,  deve-se seguir as seguintes instru��es:
+Abrir o notepad COMO ADMINISTRADOR. Em seguida, abrir o arquivo C:\windows\system32\drivers\etc\hosts deixa-lo assim:
+# Copyright (c) 1993-2009 Microsoft Corp.
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+# For example:
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+# localhost name resolution is handled within DNS itself.
+#	::1             localhost
+	127.0.0.1       localhost
+	127.0.0.1       back.test
+	127.0.0.1       front.test
+	127.0.0.1       api.test
+Isso faz com que o PC n�o v� buscar os endere�os na internet.
+
+Ap�s isso, deve-se alterar o arquivo C:\xampp\apache\conf\extra\ httpd-vhosts.conf
+Adicione as seguintes linhas (Aten��o com o endere�o da pasta):
+
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/"
+    ServerName localhost
+</VirtualHost>
+<VirtualHost *:80>
+    ServerName back.test
+    DocumentRoot "F:/Repositories/caderno/backEnd/public"
+     <Directory F:/Repositories/caderno/backEnd/public>
+         DirectoryIndex index.php
+         AllowOverride All
+         Require all granted
+    </Directory>
+</VirtualHost>
+
+Ap�s isso resete o XAMPP, e d� um CREATE DATABASE caderno;
+Abra o terminal na pasta raiz do backEnd, d� aquele git pull maroto e d� um composer update. Isso � o equivalente ao npm i.
+D� um php artisan migrate:refresh  --seed. Isso faz com que as tabelas sejam criadas e o �seed faz com que o banco seja populado com placeholders. O back est� no ar, acess�vel por http://back.test/ . Para utilizar as rotas de api, lembre-se de adicionar /api/ antes da rota.
+Ex: http://back.test/api/login
+
