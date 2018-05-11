@@ -6,6 +6,7 @@ use DB;
 use App\User;
 use App\Follower;
 use App\Score;
+use App\ManageUserLevel;
 use Illuminate\Http\Request;
 
 class FollowersController extends Controller
@@ -60,6 +61,7 @@ class FollowersController extends Controller
             $follower->save();
             $score = Score::where("user_id", $follower->user_id)->take(1)->get()[0];
             $score->points += $this->points;
+            $score->level = ManageUserLevel::checkLevel($score->points);
             $score->save();
         }
 
@@ -98,6 +100,7 @@ class FollowersController extends Controller
 
         $score = Score::where("user_id", $user_id)->take(1)->get()[0];
         $score->points -= $this->points;
+        $score->level = ManageUserLevel::checkLevel($score->points);
         $score->save();
 
         return redirect('/followers/create/' . $user_id)->with('success', 'Follower deleted!');
