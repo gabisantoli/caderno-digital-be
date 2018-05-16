@@ -7,6 +7,7 @@ use App\User;
 use App\Follower;
 use App\Score;
 use App\ManageUserLevel;
+use App\ScoreLevelName;
 use Illuminate\Http\Request;
 
 class FollowersController extends Controller
@@ -40,12 +41,15 @@ class FollowersController extends Controller
 
         $score = Score::where("user_id", $user_id)->take(1)->get()[0];
 
+        $level_name = ScoreLevelName::where("level_number", $score->level)->get()[0]['name'];
+
         return view('followers.create')
             ->with('user', $user)
             ->with('label', $btnLabel)
             ->with('action', $action)
             ->with('followers', sizeof($followers))
-            ->with('score', $score);
+            ->with('score', $score)
+            ->with('level_name', $level_name);
     }
 
     /**

@@ -16,7 +16,7 @@
     </div>
 
     <div class="text-center mt-3">
-        <h4>Nível: {{$score->level}}</h4>
+        <h4>Nível: {{$score->level}} - {{$level_name}}</h4>
         <h4>Pontos: {{$score->points}}</h4>
     </div>
 @endsection
