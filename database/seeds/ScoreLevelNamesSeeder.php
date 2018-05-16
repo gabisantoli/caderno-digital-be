@@ -44,7 +44,7 @@ class ScoreLevelNamesSeeder extends Seeder
         DB::table('score_level_names')->insert(
             [
                 'level_number' => 5,
-                'name' => "Migué",
+                'name' => "Migue",
             ]
         );
 
@@ -58,7 +58,7 @@ class ScoreLevelNamesSeeder extends Seeder
         DB::table('score_level_names')->insert(
             [
                 'level_number' => 7,
-                'name' => "Moleirão",
+                'name' => "Moleirao",
             ]
         );
 
