@@ -38,11 +38,14 @@ class FollowersController extends Controller
             $action = 'FollowersController@store';
         }
 
+        $score = Score::where("user_id", $user_id)->take(1)->get()[0];
+
         return view('followers.create')
             ->with('user', $user)
             ->with('label', $btnLabel)
             ->with('action', $action)
-            ->with('followers', sizeof($followers));
+            ->with('followers', sizeof($followers))
+            ->with('score', $score);
     }
 
     /**
