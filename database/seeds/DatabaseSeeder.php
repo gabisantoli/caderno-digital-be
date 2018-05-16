@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             PostsTableSeeder::class,
             AnswersTableSeeder::class,
             ScoresTableSeeder::class,
+            ScoreLevelNamesSeeder::class,
         ]);
     }
 }
