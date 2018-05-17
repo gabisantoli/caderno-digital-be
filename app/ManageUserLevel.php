@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ManageUserLevel extends Model
 {
+    /**
+     * verifica o nível atual do usuário 
+     * @param Integer $points - Número de pontos atual do usuário
+     * @return Integer retorna o nível atual do usuário
+     **/
     public static function checkLevel($points){
         if($points < 1000) return 1;
         if($points >= 1000 && $points < 2000) return 2;
