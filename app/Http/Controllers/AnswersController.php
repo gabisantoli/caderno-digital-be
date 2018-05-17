@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use App\Answer;
+use App\Score;
 
 class AnswersController extends Controller
-{/**
+{
+    private $points = 200;
+    
+    /**
     * Create a new controller instance.
      *
      * @return void
@@ -56,6 +60,9 @@ class AnswersController extends Controller
         $answer->post_id = $request->input('post_id');
         $answer->user_id = auth()->user()->id;
         $answer->save();
+
+        $score = new Score();
+        $score->updateScore($answer->user_id, $this->points);
 
         return redirect('/posts/' . $answer->post_id)->with('success', 'Answer created!');
     }
@@ -139,6 +146,9 @@ class AnswersController extends Controller
         }
 
         $answer->delete();
+
+        $score = new Score();
+        $score->updateScore($answer->user_id, $this->points, false);
         
         return redirect('/posts/' . $post_id)->with('success', 'Answer deleted!');
     }
