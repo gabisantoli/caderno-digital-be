@@ -30,7 +30,7 @@
 
     @if(count($answers) > 0)
         @foreach($answers as $answer)
-            <div class="text-left">{{$answer->user->name}}: {!!$answer->text!!}<br></div>
+            <div class="text-left"><a href="/followers/create/{{$answer->user->id}}" style="color: #fff">{{$answer->user->name}}</a>: {!!$answer->text!!}<br></div>
             <div class="row">
                 <small>{{$answer->created_at}}</small>
                 @if ($answer->button['edit'])
