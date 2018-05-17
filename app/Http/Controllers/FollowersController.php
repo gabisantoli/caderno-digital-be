@@ -66,10 +66,9 @@ class FollowersController extends Controller
 
         if ($follower->follower_id != $follower->user_id) {
             $follower->save();
-            $score = Score::where("user_id", $follower->user_id)->take(1)->get()[0];
-            $score->points += $this->points;
-            $score->level = ManageUserLevel::checkLevel($score->points);
-            $score->save();
+
+            $score = new Score();
+            $score->updateScore($follower->user_id, $this->points);
         }
 
         return redirect('/followers/create/'. $follower->user_id)->with('success', 'Follower created!');
@@ -105,10 +104,8 @@ class FollowersController extends Controller
             ['follower_id', auth()->user()->id],
         ])->delete();
 
-        $score = Score::where("user_id", $user_id)->take(1)->get()[0];
-        $score->points -= $this->points;
-        $score->level = ManageUserLevel::checkLevel($score->points);
-        $score->save();
+        $score = new Score();
+        $score->updateScore($user_id, $this->points, false);
 
         return redirect('/followers/create/' . $user_id)->with('success', 'Follower deleted!');
     }

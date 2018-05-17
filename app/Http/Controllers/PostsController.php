@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\Storage; //Pra deletar imagens quando deleta o po
 use App\Post;
 use App\User;
 use App\Answer;
+use App\Score;
 
 class PostsController extends Controller{
+
+    private $points = 500;
+
     public function __construct(){
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
@@ -62,6 +66,9 @@ class PostsController extends Controller{
         $post->user_id = auth()->user()->id;
         $post->cover_image = $fileNameToStore;
         $post->save();
+
+        $score = new Score();
+        $score->updateScore($post->user_id, $this->points);
 
         return redirect('/posts')->with('success', 'Post created!');
     }
@@ -171,8 +178,11 @@ class PostsController extends Controller{
             Storage::delete('/public/cover_images/' . $post->cover_image);
         }
 
-        return $post->delete();
+        $score = new Score();
+        $score->updateScore($post->user_id, $this->points, false);
 
-        //return redirect('/posts')->with('success', 'Post deleted!');
+        $post->delete();
+
+        return redirect('/posts')->with('success', 'Post deleted!');
     }
 }
