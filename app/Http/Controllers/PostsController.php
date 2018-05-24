@@ -70,7 +70,7 @@ class PostsController extends Controller{
         $score = new Score();
         $score->updateScore($post->user_id, $this->points);
 
-        return redirect('/posts')->with('success', 'Post created!');
+        return redirect('/posts')->with('success', 'Post criado!');
     }
 
     public function show($id){
@@ -111,7 +111,7 @@ class PostsController extends Controller{
 
         //Check for correct user
         if(auth()->user()->id !== $post->user_id){
-            return redirect('/posts')->with('error', 'Unauthorized page');
+            return redirect('/posts')->with('error', 'Não autorizado');
         }
         return view('posts.edit')->with('post', $post);
     }
@@ -156,7 +156,7 @@ class PostsController extends Controller{
 
         $post->save();
 
-        return redirect('/posts')->with('success', 'Post Updated successfully!');
+        return redirect('/posts')->with('success', 'Post atualizado com sucesso!');
 
     }
 
@@ -165,7 +165,7 @@ class PostsController extends Controller{
         $user_post = User::find($post->user_id);
 
         if(auth()->user()->id !== $post->user_id && auth()->user()->type == $user_post->type){
-            return redirect('/posts')->with('error', 'Unauthorized page');
+            return redirect('/posts')->with('error', 'Sem autorização');
         }
 
         //Verifica se o Usuário é aluno e se a postagem é de um professor
@@ -183,6 +183,6 @@ class PostsController extends Controller{
 
         $post->delete();
 
-        return redirect('/posts')->with('success', 'Post deleted!');
+        return redirect('/posts')->with('success', 'Post deletado!');
     }
 }
