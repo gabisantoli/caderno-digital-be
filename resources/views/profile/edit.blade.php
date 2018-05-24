@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="col-md-5 mx-auto">
-                {{Form::password('text', $user->name, ['class' => 'form-control'])}}
+                {{Form::password('password', ['class' => 'form-control'])}}
             </div>
         </div>
     </div>
