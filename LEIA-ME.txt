@@ -39,7 +39,11 @@ Adicione as seguintes linhas (Aten��o com o endere�o da pasta):
 </VirtualHost>
 
 Ap�s isso resete o XAMPP, e d� um CREATE DATABASE caderno;
-Abra o terminal na pasta raiz do backEnd, d� aquele git pull maroto e d� um composer update. Isso � o equivalente ao npm i.
-D� um php artisan migrate:refresh  --seed. Isso faz com que as tabelas sejam criadas e o �seed faz com que o banco seja populado com placeholders. O back est� no ar, acess�vel por http://back.test/ . Para utilizar as rotas de api, lembre-se de adicionar /api/ antes da rota.
+Abra o terminal na pasta raiz do backEnd, d� aquele git pull maroto e
+d� um composer update. Isso � o equivalente ao npm i.
+D� um php artisan migrate:refresh  --seed. Isso faz com que as tabelas
+sejam criadas e o �seed faz com que o banco seja populado com placeholders.
+O back est� no ar, acess�vel por http://back.test/ . 
+Para utilizar as rotas de api, lembre-se de adicionar /api/ antes da rota.
 Ex: http://back.test/api/login
 
