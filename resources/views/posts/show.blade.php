@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/posts" class="btn btn-block btn-primary ">Voltar</a>
+<div class="posts mt-5">
+    <a href="/posts" class="btn btn-primary ">Voltar</a>
     <hr>
     <h1>{{$post->title}}</h1>
     <div class="m-3 text-center">
@@ -9,7 +10,7 @@
     </div>
     <div>{!!$post->body!!}</div>
     <hr>
-    <small>Escrito em {{ strftime('%d/%m/%Y', strtotime($post->created_at))}} por: <a href="/followers/create/{{$user->id}}" style="color: #fff"> {{$post->user->name}} </a> </small>
+    <small>Escrito em {{ strftime('%d/%m/%Y', strtotime($post->created_at))}} por: <a href="/followers/create/{{$user->id}}"> {{$post->user->name}} </a> </small>
     <hr>
     @if (!Auth::guest())
         @if (Auth::user()->id == $post->user_id)
@@ -30,7 +31,7 @@
 
     @if(count($answers) > 0)
         @foreach($answers as $answer)
-            <div class="text-left"><a href="/followers/create/{{$answer->user->id}}" style="color: #fff">{{$answer->user->name}}</a>: {!!$answer->text!!}<br></div>
+            <div class="text-left"><a href="/followers/create/{{$answer->user->id}}">{{$answer->user->name}}</a>: {!!$answer->text!!}<br></div>
             <div class="row">
                 <small>{{$answer->created_at}}</small>
                 @if ($answer->button['edit'])
@@ -49,5 +50,5 @@
             <hr>
         @endforeach
     @endif
-
+    </div>
 @endsection

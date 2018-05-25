@@ -1,100 +1,101 @@
+html,
 body {
-  background: linear-gradient(-90deg, #6e276d, #de5d61, #611329);
-  color: white;
+    height: 100%;
+}
+body{
+    background: repeating-radial-gradient(circle, #8366b4, #25055b);
+    color: white;
+    background: url('http://api.thumbr.it/whitenoise-361x370.png?background=9e82cdff&noise=686373&density=48&opacity=34')
+}
+.jumbotron.vertical-center {
+    margin-bottom: 0;
 }
 
-.logo {
-  max-height: 30vh;
-}
-
-.bg-dark {
-  background: rgba(0, 0, 0, 0.5) !important;
-}
-
-.transparent-primary {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.transparent-secondary {
-  background: rgba(255, 255, 255, 0.3);
+.vertical-center {
+    min-height: 90%;
+    min-height: 90vh;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
 }
 
 .btn{
-  color: white;
-  &:hover{
-    color: white;
+    border-radius: 0;
+    box-shadow: #000 6px 8px 28px -8px;
+    border: none;
+    &-primary{
+        background: #610569;
+        &:hover{
+            background: #8f099b;
+        }
+    }
+    &-secondary-c{
+        color: white;
+        background: #69053f;
+        &:hover{
+            color: white;
+            background: #a70664;
+        }
+    }
+    &-outline-info{
+        background: #ff60a3;
+        color: white;
+        &:hover{
+            background: #db568e;
+            color: white;
+        }
+    }
+}
+.alert{
+    border-radius: 0;
+}
+.navbar-dark{
+    background-color: rgba(0,0,0,.5)
+}
+
+
+.card{    
+    color: black; 
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #ffffff 0%, #d1b3ed 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #ffffff 0%,#d1b3ed 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #ffffff 0%,#d1b3ed 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d1b3ed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */    margin-bottom: 12px;
+    border: none;
+    border-radius: 0;
+    box-shadow: #000 6px 8px 28px -4px;
+    .card-title{
+      display: inline-block;
+      width: 100%;    
+      min-height: 2.3em;
+      overflow: hidden; 
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .card-text{
+      display: inline-block;
+      width: 100%;
+      min-height: 3.1em;
+      overflow: hidden; 
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
   }
-  &:active{
-    color: white;
-  }
-}
-
-.btn-primary {
-  @extend .transparent-primary;
-  border: 0;
-  &:hover {
-    background: rgba(255, 255, 255, 0.5);
-  }
-  &:active {
-    box-shadow: 0px;
-  }
-}
-
-.btn-secondary-c {
-  @extend .transparent-secondary;
-  border: 0;
-  &:hover {
-    background: rgba(0, 0, 0, 0.5) !important;
-  }
-  &:active {
-    box-shadow: 0px;
-  }
-}
-
-.form-control {
-  background-color: transparent;
-  border: 0px;
-  border-bottom: 2px solid white;
-  border-radius: 0px;
-  color: white;
-  &:focus {
-    background-color: transparent;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    color: #CCC;
-  }
-}
-
-.form-control::-webkit-input-placeholder {
-  color: #aaa;
-  opacity: 1;
-}
-
-.form-control:-ms-input-placeholder {
-  color: #aaa;
-  opacity: 1;
-}
-
-.form-control::-ms-input-placeholder {
-  color: #aaa;
-  opacity: 1;
-}
-
-.form-control::placeholder {
-  color: #aaa;
-  opacity: 1;
-}
-
-.card, .card-header{
-  @extend .transparent-primary;
-}
-
-.post-title{
-  text-decoration: none;
-  color: #E4F1FE;
-  &:hover{
-    color: cyan;
-    text-decoration: none;
-    height: 400px;
-  }
-}

@@ -21,14 +21,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
         
         @include('inc.navbar')
-        <main class="container mt-1">
+        <main class="container align-middle">
             @include('inc.messages')
             @yield('content')
         </main>
-    </div>
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
         setTimeout(function(){CKEDITOR.replace( 'article-ckeditor')}, 50);
