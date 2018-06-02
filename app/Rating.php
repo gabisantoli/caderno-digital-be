@@ -23,4 +23,30 @@ class Rating extends Model
 
         return $num_rating;
     }
+
+    public function calculateScore($rating, $points, $reverse=false){
+        $score = new Score();
+        $user_id = -1;
+
+        if($rating->context == "post"){
+            $post = Post::find($rating->id_context);
+            $user_id = $post->user_id;
+        }
+
+        if($rating->context == "answer"){
+            $answer = Answer::find($rating->id_context);
+            $user_id = $answer->user_id;
+        }
+
+        if($rating->status == "positivo"){
+            if(!$reverse) $score->updateScore($user_id, $points);
+            if($reverse) $score->updateScore($user_id, $points, false);
+        }
+        
+        if($rating->status == "negativo"){
+            if(!$reverse) $score->updateScore($user_id, $points, false);
+            if($reverse) $score->updateScore($user_id, $points);
+        }
+
+    }
 }
