@@ -58,4 +58,26 @@ class Rating extends Model
         ];
         return $rating::where($condition)->get()->toArray();
     }
+
+    public function addClassCSSToVotingIcon($id_user, $id_context, $context, $context_obj){
+        $rating_context = new Rating();
+        $rating_context->id_user = $id_user;
+        $rating_context->id_context = $id_context;
+        $rating_context->context = $context;
+        $voto_usuario = $this->userAlreadyRated($rating_context);
+
+        if(sizeof($voto_usuario) != 0){
+            
+            if($voto_usuario[0]['status'] == "positivo"){
+                $context_obj->flag_voto_usuario['positivo_css'] = "voto-positivo";
+            }
+
+            if($voto_usuario[0]['status'] == "negativo"){
+                $context_obj->flag_voto_usuario['negativo_css'] = "voto-negativo";
+            }
+                
+        }
+
+        return $context_obj;
+    }
 }
