@@ -10013,6 +10013,36 @@ a.text-dark:focus {
           box-shadow: #000 6px 8px 28px -4px;
 }
 
+.posts .btn {
+  text-decoration: none;
+}
+
+.posts .round {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.posts .actions {
+  background: rgba(50, 0, 61, 0.5);
+  padding: 20px;
+  margin: 10px 0;
+  -webkit-box-shadow: #000 6px 8px 28px -4px;
+  box-shadow: #000 6px 8px 28px -4px;
+}
+
+.posts .actions i {
+  color: lightblue;
+}
+
+.posts .author a {
+  color: #f0f0f0;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
 html,
 body {
   height: 100%;
@@ -10124,3 +10154,8 @@ body {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+.sortable {
+  cursor: pointer;
+}
+
