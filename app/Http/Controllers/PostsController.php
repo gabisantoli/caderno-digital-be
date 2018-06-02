@@ -86,6 +86,24 @@ class PostsController extends Controller{
                 
                 $answer->avaliacoes_positivas = $rating->getRatingFromContext($answer->id, 'answer')['positivo'];
                 $answer->avaliacoes_negativas = $rating->getRatingFromContext($answer->id, 'answer')['negativo'];
+                
+                $rating_answer = new Rating();
+                $rating_answer->id_user = auth()->user()->id;
+                $rating_answer->id_context = $id;
+                $rating_answer->context = 'answer';
+                $voto_usuario_answer = $rating->userAlreadyRated($rating_answer);
+
+                if(sizeof($voto_usuario_answer) != 0){
+            
+                    if($voto_usuario_answer[0]['status'] == "positivo"){
+                        $answer->flag_voto_usuario['positivo_css'] = "voto_positivo";
+                    }
+        
+                    if($voto_usuario_answer[0]['status'] == "negativo"){
+                        $answer->flag_voto_usuario['negativo_css'] = "voto_negativo";
+                    }
+                        
+                }
 
                 if (auth()->user()->id == $answer->user_id) {
                     $answer->button = array(
@@ -105,6 +123,24 @@ class PostsController extends Controller{
         
         $post->avaliacoes_positivas = $rating->getRatingFromContext($id, 'post')['positivo'];
         $post->avaliacoes_negativas = $rating->getRatingFromContext($id, 'post')['negativo'];
+        
+        $rating_post = new Rating();
+        $rating_post->id_user = auth()->user()->id;
+        $rating_post->id_context = $id;
+        $rating_post->context = 'post';
+        $voto_usuario = $rating->userAlreadyRated($rating_post);
+
+        if(sizeof($voto_usuario) != 0){
+            
+            if($voto_usuario[0]['status'] == "positivo"){
+                $post->flag_voto_usuario['positivo_css'] = "voto_positivo";
+            }
+
+            if($voto_usuario[0]['status'] == "negativo"){
+                $post->flag_voto_usuario['negativo_css'] = "voto_negativo";
+            }
+                
+        }
 
         return view('posts.show')
             ->with('post', $post)

@@ -32,11 +32,11 @@
         <div class="float-right">
         {{$post->avaliacoes_positivas}}
         <a href="/ratings/store/post/{{$post->id}}/positivo/{{$post->id}}">
-            <i class="fas fa-heart fa-2x"></i>
+            <i class="fas fa-heart fa-2x {{$post->flag_voto_usuario['positivo_css']}}"></i>
         </a>
         {{$post->avaliacoes_negativas}}
         <a href="/ratings/store/post/{{$post->id}}/negativo/{{$post->id}}">
-            <i class="fas fa-thumbs-down fa-2x"></i>
+            <i class="fas fa-thumbs-down fa-2x {{$post->flag_voto_usuario['negativo_css']}}"></i>
         </a>
         </div>
         <div class="clearfix"></div>
@@ -53,11 +53,11 @@
                 <div class="card-footer">
                     <div class="float-left">
                         <a href="/ratings/store/answer/{{$answer->id}}/positivo/{{$post->id}}" class="card-link">
-                            <i class="fas fa-heart fa-2x"></i>
+                            <i class="fas fa-heart fa-2x {{$answer->flag_voto_usuario['positivo_css']}}"></i>
                         </a>{{$answer->avaliacoes_positivas}}
 
                         <a href="/ratings/store/answer/{{$answer->id}}/negativo/{{$post->id}}" class="card-link">
-                            <i class="fas fa-thumbs-down fa-2x"></i>
+                            <i class="fas fa-thumbs-down fa-2x {{$answer->flag_voto_usuario['negativo_css']}}"></i>
                         </a>{{$answer->avaliacoes_negativas}}
 
                     </div>

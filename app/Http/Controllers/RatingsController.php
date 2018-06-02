@@ -40,12 +40,8 @@ class RatingsController extends Controller
         $rating->status = $status;
         
         //Procura se o usuário já avaliou essa postagem ou resposta
-        $condition = [
-            "id_user" => auth()->user()->id,
-            "id_context" => $context_id,
-            "context" => $context
-        ];
-        $check_rating = $rating::where($condition)->get()->toArray();
+        $check_rating = $rating->userAlreadyRated($rating);
+        print_r($check_rating);
         
         if(sizeof($check_rating) == 0){
             //Se o usuário ainda não tinha avaliado, grava avaliação
@@ -53,7 +49,7 @@ class RatingsController extends Controller
             $rating->calculateScore($rating, $this->points);
         }else{
             //Se o usuário já tinha avaliado, deleta avaliação
-            $rating::where($condition)->delete();
+            $rating::where('id', $check_rating[0]['id'])->delete();
             $rating->calculateScore($rating, $this->points, true);
             //Se o usuário avaliou com status diferente, grava nova avaliação
             if($check_rating[0]['status'] != $rating->status){

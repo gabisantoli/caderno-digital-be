@@ -49,4 +49,13 @@ class Rating extends Model
         }
 
     }
+
+    public function userAlreadyRated($rating){
+        $condition = [
+            "id_user" => $rating->id_user,
+            "id_context" => $rating->id_context,
+            "context" => $rating->context
+        ];
+        return $rating::where($condition)->get()->toArray();
+    }
 }
