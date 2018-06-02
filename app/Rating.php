@@ -17,11 +17,8 @@ class Rating extends Model
         ];
         $num_rating['positivo'] = sizeof($rating::where($condition)->get()->toArray());
 
-        $condition = [
-            "id_context" => $id,
-            "context" => $context,
-            "status" => "negativo"
-        ];
+        $condition['status'] = "negativo"; 
+
         $num_rating['negativo'] = sizeof($rating::where($condition)->get()->toArray());
 
         return $num_rating;
