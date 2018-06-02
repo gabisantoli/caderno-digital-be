@@ -96,11 +96,11 @@ class PostsController extends Controller{
                 if(sizeof($voto_usuario_answer) != 0){
             
                     if($voto_usuario_answer[0]['status'] == "positivo"){
-                        $answer->flag_voto_usuario['positivo_css'] = "voto_positivo";
+                        $answer->flag_voto_usuario['positivo_css'] = "voto-positivo";
                     }
         
                     if($voto_usuario_answer[0]['status'] == "negativo"){
-                        $answer->flag_voto_usuario['negativo_css'] = "voto_negativo";
+                        $answer->flag_voto_usuario['negativo_css'] = "voto-negativo";
                     }
                         
                 }
@@ -133,11 +133,11 @@ class PostsController extends Controller{
         if(sizeof($voto_usuario) != 0){
             
             if($voto_usuario[0]['status'] == "positivo"){
-                $post->flag_voto_usuario['positivo_css'] = "voto_positivo";
+                $post->flag_voto_usuario['positivo_css'] = "voto-positivo";
             }
 
             if($voto_usuario[0]['status'] == "negativo"){
-                $post->flag_voto_usuario['negativo_css'] = "voto_negativo";
+                $post->flag_voto_usuario['negativo_css'] = "voto-negativo";
             }
                 
         }
