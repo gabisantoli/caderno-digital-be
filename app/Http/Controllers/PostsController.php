@@ -10,6 +10,7 @@ use App\Post;
 use App\User;
 use App\Answer;
 use App\Score;
+use App\Rating;
 
 class PostsController extends Controller{
 
@@ -77,10 +78,14 @@ class PostsController extends Controller{
         $post = Post::find($id);
         $user = User::find($post->user_id);
         $answers = Answer::where('post_id', $id)->orderBy('created_at', 'asc')->get();
+        $rating = new Rating();
 
         if (Auth::check()) {
             foreach ($answers as $answer) {
                 $answer->user = User::find($answer->user_id);
+                
+                $answer->avaliacoes_positivas = $rating->getRatingFromContext($answer->id, 'answer')['positivo'];
+                $answer->avaliacoes_negativas = $rating->getRatingFromContext($answer->id, 'answer')['negativo'];
 
                 if (auth()->user()->id == $answer->user_id) {
                     $answer->button = array(
@@ -95,10 +100,11 @@ class PostsController extends Controller{
                         'edit' => false,
                     );
                 }
-
-
             }
         }
+        
+        $post->avaliacoes_positivas = $rating->getRatingFromContext($id, 'post')['positivo'];
+        $post->avaliacoes_negativas = $rating->getRatingFromContext($id, 'post')['negativo'];
 
         return view('posts.show')
             ->with('post', $post)
