@@ -11,6 +11,9 @@ use App\Rating;
 
 class RatingsController extends Controller
 {
+
+    private $points = 50;
+
     /**
      * Display a listing of the resource.
      *
@@ -47,11 +50,16 @@ class RatingsController extends Controller
         if(sizeof($check_rating) == 0){
             //Se o usuário ainda não tinha avaliado, grava avaliação
             $rating->save();
+            $rating->calculateScore($rating, $this->points);
         }else{
             //Se o usuário já tinha avaliado, deleta avaliação
             $rating::where($condition)->delete();
+            $rating->calculateScore($rating, $this->points, true);
             //Se o usuário avaliou com status diferente, grava nova avaliação
-            if($check_rating[0]['status'] != $rating->status) $rating->save();
+            if($check_rating[0]['status'] != $rating->status){
+                $rating->save();
+                $rating->calculateScore($rating, $this->points*3);
+            } 
         }
 
         return redirect('/posts/' . $post_id)->with('success', $context.' avaliado com sucesso');
