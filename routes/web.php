@@ -19,6 +19,7 @@ Route::resource('posts', 'PostsController');
 Route::resource('answers', 'AnswersController');
 Route::get('profile', 'ProfileController@edit');
 //Route::resource('followers', 'FollowersController');
+//Route::resource('ratings', 'RatingsController');
 Auth::routes();
 
 //Dashboard
@@ -44,3 +45,7 @@ Route::get('/followers/create/{user}', 'FollowersController@create');
 Route::post('/followers/store/', 'FollowersController@store');
 Route::get('/followers/{follower}/', 'FollowersController@show');
 Route::post('/followers/destroy/', 'FollowersController@destroy');
+
+//Ratings
+Route::post('/ratings/store/{context}/{context_id}/{status}/{post_id}', 'RatingsController@store');
+Route::get('/ratings/store/{context}/{context_id}/{status}/{post_id}', 'RatingsController@store');

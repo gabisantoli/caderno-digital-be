@@ -25,15 +25,27 @@
         @endif
     @endif
 
+    <div>
+        {{$post->avaliacoes_positivas}}<a href="/ratings/store/post/{{$post->id}}/positivo/{{$post->id}}" class="btn btn-primary">Top</a>
+        {{$post->avaliacoes_negativas}}<a href="/ratings/store/post/{{$post->id}}/negativo/{{$post->id}}" class="btn btn-primary">Meh</a>
+    </div>
+
     <br><br><br>
     <a href="/answers/create/{{$post->id}}" class="btn btn-primary">Responder</a>
     <br><br><br>
 
     @if(count($answers) > 0)
         @foreach($answers as $answer)
-            <div class="text-left"><a href="/followers/create/{{$answer->user->id}}">{{$answer->user->name}}</a>: {!!$answer->text!!}<br></div>
+            <div class="text-left"><a href="/followers/create/{{$answer->user->id}}">{{$answer->user->name}}</a>: {!!$answer->text!!}</div>
             <div class="row">
-                <small>{{$answer->created_at}}</small>
+                <div class="ml-3 mb-3">
+                    {{$answer->avaliacoes_positivas}}<a href="/ratings/store/answer/{{$answer->id}}/positivo/{{$post->id}}" class="btn btn-primary">Top</a>
+                    {{$answer->avaliacoes_negativas}}<a href="/ratings/store/answer/{{$answer->id}}/negativo/{{$post->id}}" class="btn btn-primary">Meh</a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <small class="ml-3">{{$answer->created_at}}</small>
                 @if ($answer->button['edit'])
                     <div class="ml-4">
                         <a href="/answers/edit/{{$post->id}}/{{$answer->id}}" class="btn btn-primary">Editar</a>
