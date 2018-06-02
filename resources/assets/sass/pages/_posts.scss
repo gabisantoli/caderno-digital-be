@@ -20,20 +20,29 @@
     text-align: center
   }
   .actions {
-    background: rgba(50, 0, 61, 0.5);
+    background: rgba(50, 0, 61, 0.7);
     padding: 20px;
     margin: 10px 0;
     -webkit-box-shadow: #000 6px 8px 28px -4px;
     box-shadow: #000 6px 8px 28px -4px;
-    i{
-      color: lightblue
-    }
   }
   .author {
     a{
       color: #f0f0f0;
       font-weight: bolder;
       text-decoration: underline
+    }
+  }
+  i{
+    color: #aaa;
+    &:hover{
+      color: #888
+    }
+  }
+  .voto-negativo, .voto-positivo{
+    color: #dc3545;
+    &:hover{
+      color:#ff5868;
     }
   }
 }

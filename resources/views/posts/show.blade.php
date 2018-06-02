@@ -30,14 +30,12 @@
         </div>
 
         <div class="float-right">
-        {{$post->avaliacoes_positivas}}
         <a href="/ratings/store/post/{{$post->id}}/positivo/{{$post->id}}">
             <i class="fas fa-heart fa-2x {{$post->flag_voto_usuario['positivo_css']}}"></i>
-        </a>
-        {{$post->avaliacoes_negativas}}
-        <a href="/ratings/store/post/{{$post->id}}/negativo/{{$post->id}}">
+        </a> {{$post->avaliacoes_positivas}}
+        <a href="/ratings/store/post/{{$post->id}}/negativo/{{$post->id}}" class="ml-5">
             <i class="fas fa-thumbs-down fa-2x {{$post->flag_voto_usuario['negativo_css']}}"></i>
-        </a>
+        </a> {{$post->avaliacoes_negativas}}
         </div>
         <div class="clearfix"></div>
     </div>
