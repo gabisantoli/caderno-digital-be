@@ -1,17 +1,30 @@
 .posts {
-  .card-img-top {
+  .card-image-container {
     position: relative;
-    height: 30%;
-    top: 20px;
-    width: 60%;
-    box-shadow: #000 6px 8px 28px -8px;
+    margin-top: 40%;
   }
+  
+  .card-img-top {
+    display: block;
+    position: absolute;
+    height: 40%;
+    width: 60%;
+    left: 0;
+    bottom: 100%;
+    box-shadow: #000 6px 8px 28px -8px;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+
   .img-fluid {
     box-shadow: #000 6px 8px 28px -4px;
   }
+
   .btn {
     text-decoration: none;
   }
+
   .round {
     border-radius: 50%;
     width: 50px;
