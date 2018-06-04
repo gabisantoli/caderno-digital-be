@@ -14,21 +14,9 @@ body{
 .vertical-center {
     min-height: 90%;
     min-height: 90vh;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    width: 100%;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
+    // width: 100%;
     justify-content: center;
 }
 
@@ -36,36 +24,43 @@ body{
     border-radius: 0;
     box-shadow: #000 6px 8px 28px -8px;
     border: none;
+
     &-primary{
         background: #610569;
+
         &:hover{
             background: #8f099b;
         }
     }
+
     &-secondary-c{
         color: white;
         background: #69053f;
+
         &:hover{
             color: white;
             background: #a70664;
         }
     }
+
     &-outline-info{
         background: #ff60a3;
         color: white;
+
         &:hover{
             background: #db568e;
             color: white;
         }
     }
 }
+
 .alert{
     border-radius: 0;
 }
+
 .navbar-dark{
     background-color: rgba(0,0,0,.5)
 }
-
 
 .card{    
     color: black; 
