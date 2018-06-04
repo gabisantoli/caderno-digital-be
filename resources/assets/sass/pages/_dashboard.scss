@@ -1,0 +1,27 @@
+.dashboard {
+
+    .post-title {
+        @include media-breakpoint-down(md) {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+        }
+    }
+
+    .post-row {
+        padding-top: 10px;
+        margin-top: 10px;
+        border-top: 1px solid lighten(#2b2b2b, 40%);
+    }
+
+    .post-actions {
+        text-align: center;
+
+        a,
+        form,
+        button {
+            display: inline-block;
+            margin: 5px 0;
+        }
+    }
+}
